@@ -20,6 +20,25 @@ api для проекта yatube, где хранятится инофрмаци
 - gunicorn.
 
 
+## Подготовка удаленного сервера для развертывания приложения
+
+Для работы с проектом на удаленном сервере должен быть установлен Docker и docker-compose.
+Установка docker:
+```
+sudo curl -fsSL https://get.docker.com -o get-docker.sh
+```
+Запуск docker:
+```
+sh get-docker.sh
+```
+Установка docker-compose:
+```
+sudo apt install docker-compose
+```
+Создайте папку проекта на удаленном сервере и скопируйте туда файлы docker-compose.yaml, Dockerfile, host.conf:
+```
+scp ./<FILENAME> <USER>@<HOST>:/home/<USER>/yamdb_final/
+```
 
 ##Запуск приложения в контейнерах
 
