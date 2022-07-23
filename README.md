@@ -8,35 +8,13 @@ api для проекта yatube, где хранятится инофрмаци
 3. Автоматический деплой на боевой сервер,
 4. Отправка сообщения в телеграмм-бот в случае успеха.
 
-
-## Подготовка удаленного сервера для развертывания приложения
-
-Для работы с проектом на удаленном сервере должен быть установлен Docker и docker-compose.
-Установка docker:
-```
-sudo curl -fsSL https://get.docker.com -o get-docker.sh
-```
-Запуск docker:
-```
-sh get-docker.sh
-```
-Установка docker-compose:
-```
-sudo apt install docker-compose
-```
-Создайте папку проекта на удаленном сервере и скопируйте туда файлы docker-compose.yaml, Dockerfile, host.conf:
-```
-scp ./<FILENAME> <USER>@<HOST>:/home/<USER>/yamdb_final/
-```
-
-##Запуск приложения в контейнерах
+##Запуск проекта:
 
 Сначала нужно клонировать репозиторий и перейти в корневую папку:
 ```
 git clone git@github.com:TretyakovAnton/yamdb_final.git
 cd yamdb_final
 ```
-
 Затем нужно перейти в папку yamdb_final/infra и создать в ней файл .env с 
 переменными окружения, необходимыми для работы приложения.
 ```
@@ -56,15 +34,6 @@ DB_HOST=db
 DB_PORT=5432
 ```
 
-##c Подготовка репозитория на GitHub
-
-Для использования Continuous Integration и Continuous Deployment необходимо в репозитории на GitHub прописать Secrets - переменные доступа к вашим сервисам.
-Переменые прописаны в workflows/yamdb_workflow.yaml
-
-* DOCKER_PASSWORD, DOCKER_USERNAME - для загрузки и скачивания образа с DockerHub 
-* USER, HOST, PASSPHRASE, SSH_KEY - для подключения к удаленному серверу 
-* TELEGRAM_TO, TELEGRAM_TOKEN - для отправки сообщений в Telegram
-
 Далее следует запустить docker-compose: 
 ```
 docker-compose up -d --build
@@ -79,7 +48,38 @@ docker-compose exec web python manage.py migrate
 docker-compose exec web python manage.py createsuperuser
 docker-compose exec web python manage.py collectstatic --no-input 
 ```
-После этого проект должен быть доступен по адресу http://localhost/. 
+ 
+
+## Подготовка удаленного сервера для развертывания приложения
+
+Для работы с проектом на удаленном сервере должен быть установлен Docker и docker-compose.
+Установка docker:
+```
+sudo curl -fsSL https://get.docker.com -o get-docker.sh
+```
+Запуск docker:
+```
+sh get-docker.sh
+```
+Установка docker-compose:
+```
+sudo apt install docker-compose
+```
+Создайте папку проекта на удаленном сервере и скопируйте туда файлы docker-compose.yaml и папку nginx:
+
+
+
+
+##Подготовка репозитория на GitHub
+
+Для использования Continuous Integration и Continuous Deployment необходимо в репозитории на GitHub прописать Secrets - переменные доступа к вашим сервисам.
+Переменые прописаны в workflows/yamdb_workflow.yaml
+```
+DOCKER_PASSWORD, DOCKER_USERNAME - для загрузки и скачивания образа с DockerHub 
+USER, HOST, PASSPHRASE, SSH_KEY - для подключения к удаленному серверу 
+TELEGRAM_TO, TELEGRAM_TOKEN - для отправки сообщений в Telegram
+```
+
 
 ## После каждого обновления репозитория (`git push`) будет происходить:
 1. Проверка кода на соответствие стандарту PEP8 (с помощью пакета flake8) и запуск pytest из репозитория yamdb_final
