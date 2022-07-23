@@ -48,7 +48,7 @@ git clone git@github.com:TretyakovAnton/yamdb_final.git
 cd yamdb_final
 ```
 
-Затем нужно перейти в папку infra_sp2/infra и создать в ней файл .env с 
+Затем нужно перейти в папку yamdb_final/infra и создать в ней файл .env с 
 переменными окружения, необходимыми для работы приложения.
 ```
 cd infra/
@@ -66,6 +66,16 @@ POSTGRES_PASSWORD=postgres
 DB_HOST=db
 DB_PORT=5432
 ```
+
+##c Подготовка репозитория на GitHub
+
+Для использования Continuous Integration и Continuous Deployment необходимо в репозитории на GitHub прописать Secrets - переменные доступа к вашим сервисам.
+Переменые прописаны в workflows/yamdb_workflow.yaml
+
+* DOCKER_PASSWORD, DOCKER_USERNAME - для загрузки и скачивания образа с DockerHub 
+* USER, HOST, PASSPHRASE, SSH_KEY - для подключения к удаленному серверу 
+* TELEGRAM_TO, TELEGRAM_TOKEN - для отправки сообщений в Telegram
+
 
 Далее следует запустить docker-compose: 
 ```
