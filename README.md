@@ -8,17 +8,6 @@ api для проекта yatube, где хранятится инофрмаци
 3. Автоматический деплой на боевой сервер,
 4. Отправка сообщения в телеграмм-бот в случае успеха.
 
-##Стэк технологий:
-
-- Python 3.7
-- Django
-- DRF
-- Simple-JWT
-- PostgreSQL
-- Docker
-- nginx
-- gunicorn.
-
 
 ## Подготовка удаленного сервера для развертывания приложения
 
@@ -76,10 +65,6 @@ DB_PORT=5432
 * USER, HOST, PASSPHRASE, SSH_KEY - для подключения к удаленному серверу 
 * TELEGRAM_TO, TELEGRAM_TOKEN - для отправки сообщений в Telegram
 
-##Бэйдж
-https://github.com/TretyakovAnton/yamdb_final/workflows/yamdb_workflow.yaml/badge.svg
-
-
 Далее следует запустить docker-compose: 
 ```
 docker-compose up -d --build
@@ -95,6 +80,12 @@ docker-compose exec web python manage.py createsuperuser
 docker-compose exec web python manage.py collectstatic --no-input 
 ```
 После этого проект должен быть доступен по адресу http://localhost/. 
+
+## После каждого обновления репозитория (`git push`) будет происходить:
+1. Проверка кода на соответствие стандарту PEP8 (с помощью пакета flake8) и запуск pytest из репозитория yamdb_final
+2. Сборка и доставка докер-образов на Docker Hub.
+3. Автоматический деплой.
+4. Отправка уведомления в Telegram.
 
 ##Заполнение базы данных
 
@@ -114,6 +105,9 @@ docker-compose stop
 ```
 docker-compose start 
 ```
+
+##Бэйдж
+https://github.com/TretyakovAnton/yamdb_final/workflows/yamdb_workflow.yaml/badge.svg
 
 ## Примеры запросов:
 
