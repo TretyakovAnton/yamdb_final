@@ -76,6 +76,9 @@ DB_PORT=5432
 * USER, HOST, PASSPHRASE, SSH_KEY - для подключения к удаленному серверу 
 * TELEGRAM_TO, TELEGRAM_TOKEN - для отправки сообщений в Telegram
 
+##Бэйдж
+https://github.com/TretyakovAnton/yamdb_final/workflows/yamdb_workflow.yaml/badge.svg
+
 
 Далее следует запустить docker-compose: 
 ```
