@@ -111,6 +111,8 @@ docker-compose stop
 ```
 docker-compose start 
 ```
+#Ссылка на проект:
+http://84.252.142.163/
 
 ##Бэйдж
 https://github.com/TretyakovAnton/yamdb_final/workflows/yamdb_workflow.yaml/badge.svg
@@ -195,8 +197,3 @@ https://github.com/TretyakovAnton/yamdb_final/workflows/yamdb_workflow.yaml/badg
 }
 ```
 
-
-##Документация в формате Redoc:
-
-Чтобы посмотреть документацию API в формате Redoc, нужно локально запустить 
-проект и перейти на страницу http://127.0.0.1:8000/redoc/
