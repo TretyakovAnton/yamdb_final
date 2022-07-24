@@ -7,4 +7,4 @@ COPY . .
 RUN python -m pip install --upgrade pip
 RUN pip3 install -r requirements.txt --no-cache-dir
 
-CMD ["gunicorn", "yamdb_final.wsgi:application", "--bind", "0:8000"]
+CMD ["gunicorn", "api_yamdb/api_yamdb.wsgi:application", "--bind", "0:8000"]
