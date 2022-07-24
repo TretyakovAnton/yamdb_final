@@ -9,7 +9,8 @@ services:
       - ./.env
   web:
     image: snowphoen1x/yamdb_final:latest
-    restart: always
+    #restart: always
+    command: gunicorn --bind 0.0.0.0:8080 --user nginx api_yamdb.wsgi
     volumes:
       - static_value:/app/static/
       - media_value:/app/media/
