@@ -11,8 +11,8 @@ services:
     image: snowphoen1x/yamdb_final:latest
     restart: always
     volumes:
-      - static_value:/app/static/
-      - media_value:/app/media/
+      - static_volume:/home/app/web/static
+      - media_volume:/home/app/web/media
     depends_on:
       - db
     env_file:
