@@ -49,23 +49,19 @@ DB_HOST=db
 DB_PORT=5432
 ```
 
-## Подготовка удаленного сервера для развертывания приложения
+## Запуск проекта на сервере:
+Установите Docker и Docker-compose:
+```
+sudo apt install docker.io
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+Проверьте корректность установки Docker-compose:
+```
+sudo  docker-compose --version
+```
 
-Для работы с проектом на удаленном сервере должен быть установлен Docker и docker-compose.
-Установка docker:
-```
-sudo curl -fsSL https://get.docker.com -o get-docker.sh
-```
-Запуск docker:
-```
-sh get-docker.sh
-```
-Установка docker-compose:
-```
-sudo apt install docker-compose
-```
-Скопируйте файлы docker-compose.yaml и папку nginx:
-
+Скопируйте подготовленные файлы docker-compose.yaml и nginx/default.conf из вашего проекта на сервер
 
 
 
@@ -78,6 +74,12 @@ sudo apt install docker-compose
 DOCKER_PASSWORD, DOCKER_USERNAME - для загрузки и скачивания образа с DockerHub 
 USER, HOST, PASSPHRASE, SSH_KEY - для подключения к удаленному серверу 
 TELEGRAM_TO, TELEGRAM_TOKEN - для отправки сообщений в Telegram
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+DB_HOST=db
+DB_PORT=5432
 ```
 
 
@@ -87,19 +89,13 @@ TELEGRAM_TO, TELEGRAM_TOKEN - для отправки сообщений в Tele
 3. Автоматический деплой.
 4. Отправка уведомления в Telegram.
 
-Далее следует запустить docker-compose: 
-```
-docker-compose up -d --build
-```
-Будут созданы и запущены в фоновом режиме необходимые для работы приложения 
-контейнеры (db, web, nginx).
 
 Затем нужно внутри контейнера web выполнить миграции, создать 
 суперпользователя и собрать статику:
 ```
-docker-compose exec web python manage.py migrate
-docker-compose exec web python manage.py createsuperuser
-docker-compose exec web python manage.py collectstatic --no-input 
+sudo docker-compose exec web python manage.py migrate
+sudo docker-compose exec web python manage.py createsuperuser
+sudo docker-compose exec web python manage.py collectstatic --no-input 
 ```
 
 
