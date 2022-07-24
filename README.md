@@ -1,7 +1,6 @@
 #api_yamdb
 api для проекта yatube, где хранятится инофрмация о произведениях.
 
-
 С использованием Continuous Integration и Continuous Deployment.
 При пуше в ветку main автоматически отрабатывают сценарии:
 1. Автоматический запуск тестов,
@@ -35,22 +34,6 @@ DB_HOST=db
 DB_PORT=5432
 ```
 
-Далее следует запустить docker-compose: 
-```
-docker-compose up -d --build
-```
-Будут созданы и запущены в фоновом режиме необходимые для работы приложения 
-контейнеры (db, web, nginx).
-
-Затем нужно внутри контейнера web выполнить миграции, создать 
-суперпользователя и собрать статику:
-```
-docker-compose exec web python manage.py migrate
-docker-compose exec web python manage.py createsuperuser
-docker-compose exec web python manage.py collectstatic --no-input 
-```
- 
-
 ## Подготовка удаленного сервера для развертывания приложения
 
 Для работы с проектом на удаленном сервере должен быть установлен Docker и docker-compose.
@@ -66,7 +49,8 @@ sh get-docker.sh
 ```
 sudo apt install docker-compose
 ```
-Создайте папку проекта на удаленном сервере и скопируйте туда файлы docker-compose.yaml и папку nginx:
+Скопируйте файлы docker-compose.yaml и папку nginx:
+
 
 
 
@@ -88,10 +72,20 @@ TELEGRAM_TO, TELEGRAM_TOKEN - для отправки сообщений в Tele
 3. Автоматический деплой.
 4. Отправка уведомления в Telegram.
 
-##Заполнение базы данных
+Далее следует запустить docker-compose: 
+```
+docker-compose up -d --build
+```
+Будут созданы и запущены в фоновом режиме необходимые для работы приложения 
+контейнеры (db, web, nginx).
 
-Нужно зайти на на http://localhost/admin/, авторизоваться и внести записи 
-в базу данных через админку.
+Затем нужно внутри контейнера web выполнить миграции, создать 
+суперпользователя и собрать статику:
+```
+docker-compose exec web python manage.py migrate
+docker-compose exec web python manage.py createsuperuser
+docker-compose exec web python manage.py collectstatic --no-input 
+```
 
 
 
